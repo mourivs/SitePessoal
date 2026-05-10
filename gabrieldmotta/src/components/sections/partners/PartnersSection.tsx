@@ -2,9 +2,11 @@ import "./partners.css";
 import { partnersContent } from "./partnersContent";
 import { ArrowUpRight } from "lucide-react";
 import { useScrollReveal } from "../../../hooks/useScrollReveal";
+import { useLanguage } from "../../../i18n/LanguageContext";
 
 export function PartnersSection() {
   useScrollReveal();
+  const { t } = useLanguage();
 
   function handleSectionMove(event: React.MouseEvent<HTMLElement>) {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -50,10 +52,10 @@ export function PartnersSection() {
       <div className="partners-section__container">
         <div className="partners-section__header reveal">
           <span className="partners-section__label">
-            {partnersContent.label}
+            {t("partners.label")}
           </span>
           <h2 className="partners-section__subtitle">
-            {partnersContent.subtitle}
+            {t("partners.subtitle")}
           </h2>
         </div>
 

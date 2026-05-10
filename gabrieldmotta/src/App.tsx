@@ -5,11 +5,13 @@ import { SkillsSection } from "./components/sections/skills/SkillsSection";
 import { WorkSection } from "./components/sections/work/WorkSection";
 import { ServicesSection } from "./components/sections/services/ServicesSection";
 import { PartnersSection } from "./components/sections/partners/PartnersSection";
+import { LanguageSwitcher } from "./components/LanguageSwitcher/LanguageSwitcher";
 import "./styles/globals.css";
 
 function App() {
   return (
     <>
+      <LanguageSwitcher />
       <HomeSection />
       <MoreThanDevSection />
       <BioSection />

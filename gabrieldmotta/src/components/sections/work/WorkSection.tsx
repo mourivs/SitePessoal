@@ -2,11 +2,15 @@ import "./work.css";
 import { workContent } from "./workContent";
 import { ArrowUpRight } from "lucide-react";
 import { useScrollReveal } from "../../../hooks/useScrollReveal";
+import { useLanguage } from "../../../i18n/LanguageContext";
 import { useMemo, useRef } from "react";
 
 export function WorkSection() {
   useScrollReveal();
+  const { t } = useLanguage();
   const sectionRef = useRef<HTMLElement | null>(null);
+
+  const translatedProjects = t<{ year: string; title: string; description: string; type: string }[]>("work.projects");
 
   const featuredProjects = workContent.projects.filter((project) => project.featured);
   const secondaryProjects = workContent.projects.filter((project) => !project.featured);
@@ -85,81 +89,89 @@ export function WorkSection() {
 
       <div className="work-section__container">
         <div className="work-section__header reveal">
-          <span className="work-section__label">{workContent.label}</span>
-          <h2 className="work-section__title">{workContent.title}</h2>
-          <p className="work-section__description">{workContent.description}</p>
+          <span className="work-section__label">{t("work.label")}</span>
+          <h2 className="work-section__title">{t("work.title")}</h2>
+          <p className="work-section__description">{t("work.description")}</p>
         </div>
 
         <div className="work-section__featured">
-          {featuredProjects.map((project) => (
-            <a
-              key={project.title}
-              href={project.href}
-              className="work-card work-card--featured reveal"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <div className="work-card__media">
-                <img src={project.image} alt={project.title} className="work-card__image" />
-                <div className="work-card__overlay" />
-                <div className="work-card__glow" />
-              </div>
+          {featuredProjects.map((project) => {
+            const translated = translatedProjects[workContent.projects.indexOf(project)];
 
-              <div className="work-card__content">
-                <div className="work-card__meta">
-                  <span className="work-card__year">{project.year}</span>
-                  <span className="work-card__type">{project.type}</span>
+            return (
+              <a
+                key={project.title}
+                href={project.href}
+                className="work-card work-card--featured reveal"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <div className="work-card__media">
+                  <img src={project.image} alt={project.title} className="work-card__image" />
+                  <div className="work-card__overlay" />
+                  <div className="work-card__glow" />
                 </div>
 
-                <div className="work-card__bottom">
-                  <div>
-                    <h3 className="work-card__title">{project.title}</h3>
-                    <p className="work-card__description">{project.description}</p>
+                <div className="work-card__content">
+                  <div className="work-card__meta">
+                    <span className="work-card__year">{translated?.year ?? project.year}</span>
+                    <span className="work-card__type">{translated?.type ?? project.type}</span>
                   </div>
 
-                  <span className="work-card__icon">
-                    <ArrowUpRight size={20} strokeWidth={2} />
-                  </span>
+                  <div className="work-card__bottom">
+                    <div>
+                      <h3 className="work-card__title">{project.title}</h3>
+                      <p className="work-card__description">{translated?.description ?? project.description}</p>
+                    </div>
+
+                    <span className="work-card__icon">
+                      <ArrowUpRight size={20} strokeWidth={2} />
+                    </span>
+                  </div>
                 </div>
-              </div>
-            </a>
-          ))}
+              </a>
+            );
+          })}
         </div>
 
         <div className="work-section__grid">
-          {secondaryProjects.map((project) => (
-            <a
-              key={project.title}
-              href={project.href}
-              className="work-card work-card--secondary reveal"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <div className="work-card__media">
-                <img src={project.image} alt={project.title} className="work-card__image" />
-                <div className="work-card__overlay" />
-                <div className="work-card__glow" />
-              </div>
+          {secondaryProjects.map((project) => {
+            const translated = translatedProjects[workContent.projects.indexOf(project)];
 
-              <div className="work-card__content">
-                <div className="work-card__meta">
-                  <span className="work-card__year">{project.year}</span>
-                  <span className="work-card__type">{project.type}</span>
+            return (
+              <a
+                key={project.title}
+                href={project.href}
+                className="work-card work-card--secondary reveal"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <div className="work-card__media">
+                  <img src={project.image} alt={project.title} className="work-card__image" />
+                  <div className="work-card__overlay" />
+                  <div className="work-card__glow" />
                 </div>
 
-                <div className="work-card__bottom">
-                  <div>
-                    <h3 className="work-card__title">{project.title}</h3>
-                    <p className="work-card__description">{project.description}</p>
+                <div className="work-card__content">
+                  <div className="work-card__meta">
+                    <span className="work-card__year">{translated?.year ?? project.year}</span>
+                    <span className="work-card__type">{translated?.type ?? project.type}</span>
                   </div>
 
-                  <span className="work-card__icon">
-                    <ArrowUpRight size={18} strokeWidth={2} />
-                  </span>
+                  <div className="work-card__bottom">
+                    <div>
+                      <h3 className="work-card__title">{project.title}</h3>
+                      <p className="work-card__description">{translated?.description ?? project.description}</p>
+                    </div>
+
+                    <span className="work-card__icon">
+                      <ArrowUpRight size={18} strokeWidth={2} />
+                    </span>
+                  </div>
                 </div>
-              </div>
-            </a>
-          ))}
+              </a>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -1,31 +1,31 @@
 import "./moreThanDev.css";
-import {
-  moreThanDevContent,
-  getYoutubeThumbnail,
-} from "./moreThanDevContent";
+import { getYoutubeThumbnail } from "./moreThanDevContent";
 import { useScrollReveal } from "../../../hooks/useScrollReveal";
+import { useLanguage } from "../../../i18n/LanguageContext";
 
 export function MoreThanDevSection() {
   useScrollReveal();
+  const { t } = useLanguage();
 
-  const thumbnail = getYoutubeThumbnail(moreThanDevContent.youtubeUrl);
+  const youtubeUrl = "https://www.youtube.com/watch?v=0DKFQ_YlJ3Y";
+  const thumbnail = getYoutubeThumbnail(youtubeUrl);
 
   return (
     <section className="more-than-dev">
       <div className="more-than-dev__container">
         <div className="more-than-dev__content reveal">
           <h2 className="more-than-dev__title">
-            {moreThanDevContent.title}
+            {t("moreThanDev.title")}
           </h2>
 
           <p className="more-than-dev__description">
-            {moreThanDevContent.description}
+            {t("moreThanDev.description")}
           </p>
         </div>
 
         <a
           className="more-than-dev__media reveal"
-          href={moreThanDevContent.youtubeUrl}
+          href={youtubeUrl}
           target="_blank"
           rel="noreferrer"
           aria-label="Open YouTube video by Mourivs"
@@ -47,7 +47,7 @@ export function MoreThanDevSection() {
           </div>
 
           <span className="more-than-dev__label">
-            {moreThanDevContent.videoLabel}
+            {t("moreThanDev.videoLabel")}
           </span>
         </a>
       </div>

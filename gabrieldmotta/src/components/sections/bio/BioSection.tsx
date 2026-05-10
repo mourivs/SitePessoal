@@ -1,38 +1,31 @@
 import "./bio.css";
 import { bioContent } from "./bioContent";
 import { useScrollReveal } from "../../../hooks/useScrollReveal";
+import { useLanguage } from "../../../i18n/LanguageContext";
 
 export function BioSection() {
   useScrollReveal();
+  const { t } = useLanguage();
 
   return (
     <section className="bio-section">
       <div className="bio-section__container">
         <div className="bio-section__left reveal">
           <div className="bio-section__intro-block">
-            <span className="bio-section__eyebrow">{bioContent.sectionLabel}</span>
+            <span className="bio-section__eyebrow">{t("bio.sectionLabel")}</span>
 
             <p className="bio-section__lead">
-              Currently based in <strong>Maringá, Paraná, Brazil</strong>, I am
-              completing my degree in <strong>Analysis and Systems Development</strong>.
-              I am 20 years old and deeply passionate about front-end development,
-              with a strong focus on building modern, intuitive, and visually
-              engaging user interfaces.
+              {t("bio.heading")}
             </p>
           </div>
 
           <div className="bio-section__approach-card">
             <span className="bio-section__approach-title">
-              {bioContent.approachLabel}
+              {t("bio.approachLabel")}
             </span>
 
             <p className="bio-section__approach-text">
-              My approach to development is driven by a passion for creating
-              clean, modern, and highly intuitive user experiences. I focus on
-              building responsive and efficient interfaces, combining strong
-              visual design with solid performance. I aim to deliver solutions
-              that are not only functional, but also engaging, scalable, and
-              impactful.
+              {t("bio.approachText")}
             </p>
           </div>
         </div>
@@ -51,8 +44,8 @@ export function BioSection() {
             <div className="bio-section__accent bio-section__accent--two" />
 
             <div className="bio-section__floating-card">
-              <span>Front-end</span>
-              <span>UI / Motion / Code</span>
+              <span>{t("bio.floatingLabel")}</span>
+              <span>{t("bio.floatingSublabel")}</span>
             </div>
           </div>
         </div>

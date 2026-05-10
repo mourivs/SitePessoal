@@ -1,26 +1,26 @@
 import "./skills.css";
 import { skillsContent } from "./skillsContent";
 import { useScrollReveal } from "../../../hooks/useScrollReveal";
+import { useLanguage } from "../../../i18n/LanguageContext";
 
 export function SkillsSection() {
   useScrollReveal();
+  const { t } = useLanguage();
+
+  const items = t<{ title: string; description: string }[]>("skills.items");
 
   return (
     <section className="skills-section">
       <div className="skills-section__container">
         <div className="skills-section__header reveal">
-          <span className="skills-section__label">{skillsContent.label}</span>
-
-          <h2 className="skills-section__title">{skillsContent.title}</h2>
-
-          <p className="skills-section__description">
-            {skillsContent.description}
-          </p>
+          <span className="skills-section__label">{t("skills.label")}</span>
+          <h2 className="skills-section__title">{t("skills.title")}</h2>
+          <p className="skills-section__description">{t("skills.description")}</p>
         </div>
 
         <div className="skills-section__grid">
-          {skillsContent.items.map((item, index) => {
-            const Icon = item.icon;
+          {items.map((item, index) => {
+            const Icon = skillsContent.items[index].icon;
 
             return (
               <article className="skills-card reveal" key={index}>

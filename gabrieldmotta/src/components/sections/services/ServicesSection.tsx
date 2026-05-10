@@ -1,21 +1,25 @@
 import "./services.css";
 import { servicesContent } from "./servicesContent";
 import { useScrollReveal } from "../../../hooks/useScrollReveal";
+import { useLanguage } from "../../../i18n/LanguageContext";
 
 export function ServicesSection() {
   useScrollReveal();
+  const { t } = useLanguage();
+
+  const items = t<{ title: string; description: string }[]>("services.items");
 
   return (
     <section className="services-section">
       <div className="services-section__container">
         <div className="services-section__header reveal">
-          <span className="services-section__label">{servicesContent.label}</span>
-          <h2 className="services-section__title">{servicesContent.title}</h2>
+          <span className="services-section__label">{t("services.label")}</span>
+          <h2 className="services-section__title">{t("services.title")}</h2>
         </div>
 
         <div className="services-section__layout">
-          {servicesContent.items.map((item, index) => {
-            const Icon = item.icon;
+          {items.map((item, index) => {
+            const Icon = servicesContent.items[index].icon;
 
             return (
               <article key={index} className="service-emblem reveal">
