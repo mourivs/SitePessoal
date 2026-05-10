@@ -1,0 +1,220 @@
+.services-section {
+  position: relative;
+  width: 100%;
+  padding: 140px 0;
+  background: #d9d9d9;
+  color: #111;
+  overflow: hidden;
+}
+
+.services-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 18% 20%, rgba(0, 0, 0, 0.035), transparent 20%),
+    radial-gradient(circle at 82% 75%, rgba(79, 140, 255, 0.06), transparent 18%);
+  pointer-events: none;
+}
+
+.services-section__container {
+  position: relative;
+  z-index: 1;
+  width: min(92%, 1500px);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+}
+
+.services-section__header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.services-section__label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(17, 17, 17, 0.5);
+}
+
+.services-section__title {
+  font-size: clamp(3rem, 6vw, 6rem);
+  line-height: 0.92;
+  letter-spacing: -0.06em;
+  font-weight: 700;
+  color: #111;
+}
+
+.services-section__layout {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(220px, 1fr));
+  column-gap: 34px;
+  row-gap: 54px;
+  align-items: start;
+}
+
+.service-emblem {
+  text-align: center;
+  padding: 6px 8px 0;
+  transition: transform 0.35s ease;
+}
+
+.service-emblem:hover {
+  transform: translateY(-6px);
+}
+
+.service-emblem__icon-wrap {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 18px;
+  display: grid;
+  place-items: center;
+}
+
+.service-emblem__ring {
+  position: absolute;
+  width: 72px;
+  height: 72px;
+  border-radius: 999px;
+  border: 2px solid rgba(17, 17, 17, 0.72);
+  opacity: 0.6;
+  transition:
+    transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+    opacity 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    clip-path 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.service-emblem__ring--left {
+  transform: translateX(-18px) scale(0.72);
+  clip-path: inset(0 50% 0 0);
+}
+
+.service-emblem__ring--right {
+  transform: translateX(18px) scale(0.72);
+  clip-path: inset(0 0 0 50%);
+}
+
+.service-emblem:hover .service-emblem__ring--left,
+.service-emblem:hover .service-emblem__ring--right {
+  transform: translateX(0) scale(1);
+  clip-path: inset(0 0 0 0);
+  opacity: 1;
+  border-color: rgba(79, 140, 255, 0.82);
+  box-shadow:
+    0 0 18px rgba(79, 140, 255, 0.18),
+    0 0 34px rgba(79, 140, 255, 0.12);
+}
+
+.service-emblem__icon {
+  position: relative;
+  z-index: 2;
+  width: 26px;
+  height: 26px;
+  color: #111;
+  transition:
+    transform 0.35s ease,
+    color 0.35s ease,
+    filter 0.35s ease;
+}
+
+.service-emblem:hover .service-emblem__icon {
+  transform: scale(1.12);
+  color: #244d96;
+  filter: drop-shadow(0 0 10px rgba(79, 140, 255, 0.22));
+}
+
+.service-emblem__title {
+  font-size: 0.98rem;
+  line-height: 1.28;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #111;
+  max-width: 17ch;
+  margin: 0 auto 12px;
+  text-wrap: balance;
+}
+
+.service-emblem__description {
+  font-size: 0.95rem;
+  line-height: 1.62;
+  color: rgba(17, 17, 17, 0.66);
+  max-width: 28ch;
+  margin: 0 auto;
+}
+
+@media (max-width: 1280px) {
+  .services-section__layout {
+    grid-template-columns: repeat(3, minmax(220px, 1fr));
+    row-gap: 46px;
+  }
+}
+
+@media (max-width: 980px) {
+  .services-section {
+    padding: 110px 0;
+  }
+
+  .services-section__layout {
+    grid-template-columns: repeat(2, minmax(240px, 1fr));
+    column-gap: 24px;
+    row-gap: 40px;
+  }
+}
+
+@media (max-width: 700px) {
+  .services-section {
+    padding: 92px 0;
+  }
+
+  .services-section__container {
+    width: 100%;
+    padding-left: 4%;
+    gap: 34px;
+  }
+
+  .services-section__header {
+    padding-right: 4%;
+  }
+
+  .services-section__layout {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 82%;
+    overflow-x: auto;
+    gap: 16px;
+    padding: 6px 4% 10px 0;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .services-section__layout::-webkit-scrollbar {
+    display: none;
+  }
+
+  .service-emblem {
+    scroll-snap-align: start;
+    background: rgba(255, 255, 255, 0.24);
+    border: 1px solid rgba(17, 17, 17, 0.08);
+    border-radius: 24px;
+    padding: 22px 18px;
+    min-height: 100%;
+  }
+
+  .service-emblem__title {
+    font-size: 0.95rem;
+    max-width: 100%;
+  }
+
+  .service-emblem__description {
+    font-size: 0.9rem;
+    max-width: 100%;
+  }
+}
